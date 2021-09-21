@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# images y plugins del proyecto
+/src/assets/images
+/src/assets/plugins
