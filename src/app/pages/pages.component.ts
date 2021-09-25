@@ -11,6 +11,8 @@ export class PagesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    const mainTheme = (localStorage.getItem('theme')) ? localStorage.getItem('theme') : `./assets/css/colors/default.css`;
+    document.querySelector('#theme').setAttribute('href',mainTheme);
   }
 
 }
