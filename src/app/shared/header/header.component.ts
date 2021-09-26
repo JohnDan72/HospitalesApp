@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarSevice: SidebarService) { 
     this.menuItems = sidebarSevice.menu;
-    console.log(this.menuItems)
+    // console.log(this.menuItems)
   }
 
   ngOnInit(): void {

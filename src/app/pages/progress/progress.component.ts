@@ -11,7 +11,7 @@ export class ProgressComponent {
   progreso2: number = 45;
 
   getProgreso(caso = 1){
-    console.log("Callo en getProgreso ",caso)
+    // console.log("Callo en getProgreso ",caso)
     if(caso == 1){
       return this.progreso1+'%';  
     }
