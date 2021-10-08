@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Options } from 'selenium-webdriver';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { UsuarioService } from 'src/app/services/usuario.service';
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-register',
@@ -9,67 +11,83 @@ import { Options } from 'selenium-webdriver';
 })
 export class RegisterComponent {
 
-  public registerForm = this.fb.group(
+  public registerForm: FormGroup = this.fb.group(
     {
-      nombre: ['', [
+      nombre: ['asd', [
         Validators.required,
         Validators.minLength(3),]],
-      email: ['', [
+      email: ['asd@gmail.com', [
         Validators.required,]],
-      password: ['', [
+      password: ['asdasd', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(25)]],
-      password2: ['', [
+      password2: ['asdasd', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(25)],
-        this.passwordsIguales('password', 'password2')],
-        
+      ],
+
       terminos: [true, [
         Validators.required,]]
-    }
+    }, {
+    validator: this.passwordsIguales('password', 'password2')
+  }
   );
   public formSubmitted: boolean = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private userService: UsuarioService) { 
+    
+  }
 
-  registrarUsuario(){
+  registrarUsuario() {
     this.formSubmitted = true;
     // console.log( this.registerForm.value );
-    console.log( this.registerForm );
+    console.log(this.registerForm);
 
-    if(this.registerForm.valid){
-      console.log("Success!!");
+    if (this.registerForm.invalid) {
+      console.log("Fail!!");
+      return;
     }
-    else{
-      console.log("Fail!!!");
-    }
+    // guardar form llamando al nuestro servicio de usuario
+    this.userService.crearUsuario(this.registerForm.value).subscribe(
+      resp => {
+        console.log("usuario creado!!!");
+        console.log(resp);
+      }, err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err
+        })
+        console.log(err)
+      }
+    );
   }
 
-  campoNoValido( campo: string ): boolean{
-    if(this.registerForm.get( campo ).invalid && this.formSubmitted){
+  campoNoValido(campo: string): boolean {
+    if (this.registerForm.get(campo).invalid && this.formSubmitted) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
-  aceptaTerminos(){
-    if(!this.registerForm.get('terminos').value && this.formSubmitted){
+  aceptaTerminos() {
+    if (!this.registerForm.get('terminos').value && this.formSubmitted) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
-  checarPasswords(){
+  checarPasswords() {
     const pass1 = this.registerForm.get('password');
     const pass2 = this.registerForm.get('password2');
 
-    if(pass1.value !== pass2.value){
+    if (pass1.value !== pass2.value && this.formSubmitted) {
       return true;
     }
     return false;
@@ -77,17 +95,19 @@ export class RegisterComponent {
 
 
 
-  passwordsIguales(pass: string , pass2: string){
-    return ( formGroup: FormGroup ) => {
-      const passControl = formGroup.get(pass);
-      const passControl2 = formGroup.get(pass2);
+  passwordsIguales(campo1: string, campo2: string) {
 
-      if( passControl.value === passControl2.value ){
-        passControl2.setErrors(null);
+    return (control: AbstractControl): ValidationErrors | null => {
+      const pass1 = control.get(campo1);
+      const pass2 = control.get(campo2);
+
+      if (pass1.value !== pass2.value) {
+        return { noIguales: true };
       }
-      else{
-        passControl2.setErrors({ noIgual: true })
-      }
+      return null;
     }
+
+
+
   }
 }
