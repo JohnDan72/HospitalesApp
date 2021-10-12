@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { UsuarioService } from 'src/app/services/usuario.service';
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -29,14 +30,17 @@ export class RegisterComponent {
       ],
 
       terminos: [true, [
-        Validators.required,]]
+        Validators.required,
+        this.checkTerms]]
     }, {
     validator: this.passwordsIguales('password', 'password2')
   }
   );
   public formSubmitted: boolean = false;
 
-  constructor(private fb: FormBuilder, private userService: UsuarioService) { 
+  constructor(private fb: FormBuilder, 
+              private userService: UsuarioService,
+              private _router: Router) { 
     
   }
 
@@ -54,11 +58,26 @@ export class RegisterComponent {
       resp => {
         console.log("usuario creado!!!");
         console.log(resp);
+        
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario registrado exitósamente',
+          showConfirmButton: false,
+          timer: 2500
+        });
+
+        setTimeout(() => {
+          this._router.navigate(['/login'])
+        },2500)
       }, err => {
+        let errorsLabels = ``;
+        err.error.errors.forEach(errObj => {
+          errorsLabels += `${errObj.msg} `;
+        });
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: err
+          text: errorsLabels
         })
         console.log(err)
       }
@@ -81,6 +100,9 @@ export class RegisterComponent {
     else {
       return false;
     }
+  }
+  checkTerms(termControl: FormControl) {
+    return (termControl.value) ? null: { termsAceptted : false };
   }
 
   checarPasswords() {
