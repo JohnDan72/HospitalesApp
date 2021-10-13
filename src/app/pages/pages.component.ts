@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
+import { UsuarioService } from '../services/usuario.service';
+import { Usuario } from '../models/usuario.model';
 
 declare function miCustomFunction();
 
@@ -11,7 +13,11 @@ declare function miCustomFunction();
 })
 export class PagesComponent implements OnInit {
 
-  constructor(private settingService: SettingsService) { }
+  usuarioSession: Usuario;
+  constructor(private settingService: SettingsService,
+              private userService: UsuarioService) { 
+                this.usuarioSession = userService.usuario
+              }
 
   ngOnInit(): void {
     miCustomFunction()

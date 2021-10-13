@@ -31,14 +31,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.loginForm);
+    // console.log(this.loginForm);
     this.formSubmitted = true;
 
     if(this.loginForm.invalid){
-      console.log("Fail!!!!!!!");
+      // console.log("Fail!!!!!!!");
     }
     else{
-      console.log("Success...");
+      // console.log("Success...");
       this.userService.loginUser( this.loginForm.value ).subscribe( resp => {
         if( this.loginForm.get('rememberMe').value ){
           localStorage.setItem('email',this.loginForm.get('email').value);
@@ -90,11 +90,11 @@ export class LoginComponent implements OnInit {
     this.attachSignin(document.getElementById('my-signin2'));
   }
   attachSignin(element) {
-    console.log(element.id);
+    // console.log(element.id);
     this.auth2.attachClickHandler(element, {},
         (googleUser) => {
           const id_token = googleUser.getAuthResponse().id_token;
-          console.log(id_token);
+          // console.log(id_token);
           this.userService.loginGoogle(id_token).subscribe( resp => {
             this.ngZone.run( () => {
               // redirigir al dashboard
