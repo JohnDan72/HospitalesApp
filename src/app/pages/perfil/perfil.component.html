@@ -27,7 +27,8 @@
                                     class="form-control" 
                                     id="exampleInputEmail1" 
                                     placeholder="Enter email"
-                                    formControlName="email">
+                                    formControlName="email"
+                                    [readonly]="usuario.google">
                         </div>
                         <small *ngIf="campoInvalido('email')" class="text-danger">Email incorrecto</small>
 
