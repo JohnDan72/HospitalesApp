@@ -24,6 +24,7 @@ export class UsuarioService {
     this.googleInit();
   }
 
+  get token(): string{ return localStorage.getItem('token') || ''}
   googleInit() {
     return new Promise(resolve => {
       console.log("Google init...");
@@ -40,22 +41,20 @@ export class UsuarioService {
 
 
   verificarToken(): Observable<boolean> {
-    const token = localStorage.getItem('token') || '';
+
     return this.http.get(`${base_url}/login/renewToken`, {
       headers: {
-        'Authorization': token
+        'Authorization': this.token
       }
     })
       .pipe(
-        tap((resp: any) => {
+        map((resp: any) => {
           const { id, nombre, email, role, google, img } = resp.usuario;
           this.usuario = new Usuario( nombre, email, '', role, img, google, id );
           
           console.log(resp);
           localStorage.setItem('token', resp.renewedToken);
-        }),
-        map(resp => {
-          return (resp.ok) ? true : false;
+          return true;
         }),
         catchError(err => of(false))
       );
@@ -70,6 +69,14 @@ export class UsuarioService {
           console.log(resp);
         })
       );
+  }
+
+  actualizarPerfil( data: { nombre: string , email: string} ){
+    return this.http.put(`${base_url}/usuarios/${this.usuario.id}`, data , {
+        headers: {
+          'Authorization': this.token
+        }
+      });
   }
 
   loginUser(formData: LoginForm) {
