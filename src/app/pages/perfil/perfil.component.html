@@ -50,15 +50,29 @@
                 <h4 class="card-title">Avatar</h4>
                 <h6 class="card-subtitle">Imagen del usuario</h6>
                 <div class="row">
-                    <div class="col-12 mb-4">
-                        <img [src]="usuario.imagenUsr" alt="" srcset="">
+                    <div class="col-12 mb-4 text-center">
+                        <img    *ngIf="!imgTemp" 
+                                [src]="usuario.imagenUsr" 
+                                alt="" 
+                                srcset=""
+                                class="current-img">
+                        <img    *ngIf="imgTemp"
+                                [src]="imgTemp" 
+                                alt="" 
+                                srcset=""
+                                class="current-img">
 
                     </div>
                     <div class="col-12 mb-4">
-                        <input type="file" placeholder="elige imagen">
+                        <input  type="file" 
+                                placeholder="elige imagen"
+                                (change)="cambiarImg($event.target.files[0])">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                        <button type="submit" 
+                                class="btn btn-success waves-effect waves-light m-r-10"
+                                [disabled]="!imgFile"
+                                (click)="subirImg()">
                             <i class="fa fa-save mx-1"></i>
                             Cambiar imagen
                         </button>

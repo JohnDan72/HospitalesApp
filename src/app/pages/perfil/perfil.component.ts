@@ -4,6 +4,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import Swal from 'sweetalert2';
+import { FileUploadService } from '../../services/file-upload.service';
 
 @Component({
   selector: 'app-perfil',
@@ -15,9 +16,12 @@ export class PerfilComponent implements OnInit {
   usuario: Usuario;
   formSubmitted = false;
   perfilForm: FormGroup;
+  imgFile: File;
+  imgTemp: string;
   
   constructor(private userService: UsuarioService,
-    private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private fus: FileUploadService) {
   }
 
   ngOnInit(): void {
@@ -42,6 +46,10 @@ export class PerfilComponent implements OnInit {
     else{
       console.log("Success!!");
       this.userService.actualizarPerfil(this.perfilForm.value).subscribe( resp => {
+        const { nombre , email } = this.perfilForm.value;
+        this.usuario.nombre = nombre;
+        this.usuario.email = email;
+
         console.log( resp );
         Swal.fire({
           icon: 'success',
@@ -63,6 +71,51 @@ export class PerfilComponent implements OnInit {
       }
       )
     }
+  }
+
+  cambiarImg( imagen: File ){
+    
+    this.imgFile = imagen;
+
+    if(!imagen) {
+      this.imgTemp = null;
+      return;
+    };
+
+    const reader = new FileReader();
+    reader.readAsDataURL( imagen );
+
+    reader.onloadend = () => {
+      this.imgTemp = <string>reader.result;
+    }
+  }
+
+  subirImg(){
+    this.fus.actualizarFoto( this.imgFile , 'usuarios' , this.usuario.id )
+    .then( resp => {
+      console.log("Resp desde service");
+      console.log(resp);
+      if(resp.ok){
+        this.usuario.img = resp.fileName;
+        Swal.fire({
+          icon: 'success',
+          title: 'Foto actualizada exitósamente',
+          showConfirmButton: false,
+          timer: 2500
+        });
+      }
+      else{
+        let errorsLabels = ``;
+        resp.errors.forEach(errObj => {
+          errorsLabels += `${errObj.msg} `;
+        });
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorsLabels
+        })
+      }
+    })
   }
 
 }
