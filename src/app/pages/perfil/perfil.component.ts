@@ -13,11 +13,11 @@ import { FileUploadService } from '../../services/file-upload.service';
 })
 export class PerfilComponent implements OnInit {
 
-  usuario: Usuario;
-  formSubmitted = false;
-  perfilForm: FormGroup;
-  imgFile: File;
-  imgTemp: string;
+  public usuario: Usuario;
+  public formSubmitted = false;
+  public perfilForm: FormGroup;
+  public imgFile: File;
+  public imgTemp: string;
   
   constructor(private userService: UsuarioService,
               private fb: FormBuilder,

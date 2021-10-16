@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Usuario } from '../../../models/usuario.model';
 import { UsuarioService } from '../../../services/usuario.service';
+import { ModalImagenService } from '../../../services/modal-imagen.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -19,7 +20,7 @@ export class UsuariosComponent implements OnInit {
   public cargando = true;
   public busqueda = '';
 
-  constructor(private userService: UsuarioService) { }
+  constructor(private userService: UsuarioService, private modalImgServ: ModalImagenService) { }
 
   ngOnInit(): void {
     // setTimeout(() => {
@@ -27,6 +28,19 @@ export class UsuariosComponent implements OnInit {
     // },3000);
     this.sessionData = this.userService.usuario;
     this.cargarUsuarios();
+
+    this.modalImgServ.nuevaImg.subscribe( ({ uid , img }) => {
+      // se actualiza solo la img del usuario actual para no cargar de nuevo el servicio
+      this.usuarios.find( user => {
+        if(user.id == uid){
+          user.img = img;
+        }
+      });
+      // si es tu img se actualiza en todos los lados que aparece
+      if(uid == this.sessionData.id){
+        this.sessionData.img = img;
+      }
+    });
 
   }
 
@@ -109,5 +123,10 @@ export class UsuariosComponent implements OnInit {
 
       }
     })
+  }
+
+  abrirModalImg( user: Usuario ){
+    // console.log(user);
+    this.modalImgServ.abrirModal( 'usuarios' , user.id , user.imagenUsr )
   }
 }
