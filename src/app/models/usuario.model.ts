@@ -14,7 +14,7 @@ export class Usuario {
         ){}
 
         get imagenUsr(){
-            return (this.img.startsWith('https://')) ? 
+            return (this.img && this.img.startsWith('https://')) ? 
             this.img : `${base_url}/upload/?tipo=usuarios&imagenName=${this.img}`;
             
         }

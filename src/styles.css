@@ -9,3 +9,7 @@
 .selector, .cursor{
   cursor: pointer;
 }
+
+.w100{
+  width: 150px;
+}

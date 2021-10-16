@@ -23,4 +23,12 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  checarRole( titulo: string ){
+    if( titulo == 'Usuarios'){
+      if( this.usuario.role != 'ADMIN_ROLE')
+        return false;
+    }
+    return true;
+  }
+
 }
