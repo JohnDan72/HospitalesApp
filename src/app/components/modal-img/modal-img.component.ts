@@ -63,6 +63,7 @@ export class ModalImgComponent implements OnInit {
           showConfirmButton: false,
           timer: 2500
         });
+        this.cancelarModal();
       }
       else{
         let errorsLabels = ``;

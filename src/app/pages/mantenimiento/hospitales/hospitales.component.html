@@ -1,0 +1,85 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div *ngIf="cargando" class="col-auto text-center alert alert-info mx-auto">
+                        <h4 class="alert-heading">Cargando</h4>
+                        <i class="fa fa-spin fa-spinner fa-2x"></i>
+                        <div class="mb-0">Por favor espere</div>
+                    </div>
+                    <div class="col-12">
+                        <input  type="text" 
+                                class="form-control"
+                                placeholder="Busca un hospital"
+                                #id_busqueda
+                                (keyup)="buscarPorCadena(id_busqueda.value)"
+
+                                >
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!cargando" class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Total: {{totalHospitales}}</h4>
+                <h6 class="card-subtitle">Hospitales registrados en la app</h6>
+                <h6 class="card-subtitle">Current page: {{ page + 1 }}</h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped color-table primary-table">
+                        <thead >
+                            <tr>
+                                <th class="w100">Avatar</th>
+                                <th>Nombre</th>
+                                <th>Creado por</th>
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospi of hospitales" >
+                                <td class="text-center">
+                                    <img    src="{{ hospi.imagenHospi }}" 
+                                            alt="" 
+                                            srcset=""
+                                            class="mini-img cursor"
+                                            (click)="abrirModalImg(hospi)"
+                                            >
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input  type="text"
+                                                class="form-control" 
+                                                [(ngModel)]="hospi.nombre"
+                                                (change)="cambiarNombre(hospi)">
+                                    </div>
+                                </td>
+                                <td>
+                                    <img    src="{{ hospi.createdByUser.imagenUsr }}"
+                                    class="mini-img-user"
+                                    >
+                                    {{hospi.createdByUser.nombre}}
+                                </td>
+                                <td class="text-nowrap text-center">
+                                    <!-- <a *ngIf="hospi.id !== sessionData.id" href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                                    <a class="cursor" 
+                                        (click)="confirmarBorrado(hospi)" 
+                                        data-toggle="tooltip" 
+                                        data-original-title="Close"> 
+                                        <i class="fa fa-close text-danger"></i> 
+                                    </a>
+                                    <!-- <div *ngIf="hospi.id === sessionData.id" class="label label-table label-primary">Tú</div> -->
+
+                                </td>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <button *ngIf="page > 0" class="btn btn-secondary" (click)="cambiarPagina(-1)">Anterior</button>
+                <button *ngIf="page < maxPages" class="btn btn-secondary mr-3" (click)="cambiarPagina(1)">Sguiente</button>
+            </div>
+        </div>
+    </div>
+</div>
