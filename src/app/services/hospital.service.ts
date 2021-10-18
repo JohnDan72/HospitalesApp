@@ -24,6 +24,13 @@ export class HospitalService {
       }
     }
   }
+
+  // crear nuevo hospital
+  crearNuevoHospital( nombre: string ){
+    return this._http
+        .post(`${base_url}/hospitales`, { nombre } , this.headers)
+  }
+
   getHospitales( limit: number = 5 , page: number = 0 , busqueda: string = ''): Observable<GetHospitalBusquedaResponse>{
     return this._http
       .get(`${base_url}/busca/?limit=${limit}&page=${page}&collection=hospitales&busqueda=${busqueda}`, this.headers)

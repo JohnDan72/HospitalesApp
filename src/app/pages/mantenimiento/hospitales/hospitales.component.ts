@@ -45,6 +45,43 @@ export class HospitalesComponent implements OnInit {
 
   }
 
+  openHospiform(){
+    Swal.fire({
+      title: 'Nuevo hospital',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Crear'
+    }).then((result) => {
+      if(result.isConfirmed){
+        console.log("Result: ");
+        console.log(result);
+        this.hospiService.crearNuevoHospital(result.value).subscribe( resp => {
+            console.log(resp);
+            Swal.fire(
+              'Creado!!',
+              'Hospital nuevo creado con éxito',
+              'success'
+            );
+            this.cargarHospitales();
+          }, err => {
+              let errorsLabels = ``;
+              err.error.errors.forEach(errObj => {
+                errorsLabels += `${errObj.msg} `;
+              });
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: errorsLabels
+              })
+            }
+        );
+      }
+    })
+  }
+
   cargarHospitales() {
     this.cargando = true;
     this.hospiService.getHospitales(this.limit, this.page, this.busqueda).subscribe(resp => {
@@ -94,6 +131,7 @@ export class HospitalesComponent implements OnInit {
       })
     })
   }
+
   confirmarBorrado(hospi: Hospital) {
     Swal.fire({
       title: `¿Estás seguro de borrar el hospital: ${hospi.nombre}?`,

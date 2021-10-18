@@ -1,4 +1,5 @@
 <div class="row animated fadeIn">
+    
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -25,6 +26,14 @@
     <div *ngIf="!cargando" class="col-12">
         <div class="card">
             <div class="card-body">
+                <div class="row">
+                    <div class="col-12 text-right">
+                        <button class="btn btn-primary" type="button" (click)="openHospiform()">
+                            <i class="fa fa-hospital-o"></i>
+                            Nuevo hospital
+                        </button>
+                    </div>
+                </div>
                 <h4 class="card-title">Total: {{totalHospitales}}</h4>
                 <h6 class="card-subtitle">Hospitales registrados en la app</h6>
                 <h6 class="card-subtitle">Current page: {{ page + 1 }}</h6>
