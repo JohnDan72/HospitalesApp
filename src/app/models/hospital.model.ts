@@ -8,7 +8,8 @@ export class Hospital {
         public nombre: string,
         public createdByUser: Usuario,
         public img: string = '-',
-        public id?: string
+        public id?: string,
+        public _id?: string
     ) { }
 
     get imagenHospi(){

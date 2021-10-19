@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { GetHospitalBusquedaResponse } from '../interfaces/cargar-hospitales.interface';
+import { GetAllHospitalesResponse, GetHospitalBusquedaResponse } from '../interfaces/cargar-hospitales.interface';
 import { Hospital } from '../models/hospital.model';
 import { Usuario } from '../models/usuario.model';
 
@@ -50,6 +50,16 @@ export class HospitalService {
           });
 
           return { results, ...resto };
+        })
+      )
+  }
+
+  getAllHospitales(){
+    return this._http
+      .get(`${base_url}/hospitales/all`,this.headers)
+      .pipe(
+        map( (resp: GetAllHospitalesResponse) => {
+          return resp.hospitales;
         })
       )
   }
