@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Medico } from 'src/app/models/medico.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { HospitalService } from 'src/app/services/hospital.service';
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
   templateUrl: './medicos.component.html',
   styleUrls: ['./medicos.component.css']
 })
-export class MedicosComponent implements OnInit {
+export class MedicosComponent implements OnInit, OnDestroy {
   public totalMedicos: number = 0;
   public sessionData: Usuario;
   public medicos: Medico[] = [];
@@ -21,18 +22,23 @@ export class MedicosComponent implements OnInit {
   public maxPages: number = 0;
   public cargando = true;
   public busqueda = '';
+  public imgSubscription: Subscription;
 
   constructor(private userService: UsuarioService,
     private modalImgServ: ModalImagenService,
     private mediService: MedicoService,
     private hospiService: HospitalService) { }
+    
+  ngOnDestroy(): void {
+    this.imgSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
 
     this.sessionData = this.userService.usuario;
     this.cargarMedicos();
 
-    this.modalImgServ.nuevaImg.subscribe(({ uid, img }) => {
+    this.imgSubscription = this.modalImgServ.nuevaImg.subscribe(({ uid, img }) => {
       // se actualiza solo la img del hospital actual para no cargar de nuevo el servicio
       this.medicos.find(medi => {
         if (medi.id == uid) {

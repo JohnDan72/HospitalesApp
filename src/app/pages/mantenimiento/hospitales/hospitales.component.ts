@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , OnDestroy } from '@angular/core';
 import { Usuario } from '../../../models/usuario.model';
 import { Hospital } from 'src/app/models/hospital.model';
 import { HospitalService } from '../../../services/hospital.service';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import Swal from 'sweetalert2';
 import { UsuarioService } from '../../../services/usuario.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hospitales',
   templateUrl: './hospitales.component.html',
   styleUrls: ['./hospitales.component.css']
 })
-export class HospitalesComponent implements OnInit {
+export class HospitalesComponent implements OnInit, OnDestroy {
 
   public totalHospitales: number = 0;
   public sessionData: Usuario;
@@ -21,6 +22,7 @@ export class HospitalesComponent implements OnInit {
   public maxPages: number = 0;
   public cargando = true;
   public busqueda = '';
+  public imgSubscription: Subscription;
 
   constructor(private userService: UsuarioService, 
               private modalImgServ: ModalImagenService,
@@ -33,7 +35,7 @@ export class HospitalesComponent implements OnInit {
     this.sessionData = this.userService.usuario;
     this.cargarHospitales();
 
-    this.modalImgServ.nuevaImg.subscribe( ({ uid , img }) => {
+    this.imgSubscription = this.modalImgServ.nuevaImg.subscribe( ({ uid , img }) => {
       // se actualiza solo la img del hospital actual para no cargar de nuevo el servicio
       this.hospitales.find( hospi => {
         if(hospi.id == uid){
@@ -43,6 +45,11 @@ export class HospitalesComponent implements OnInit {
       
     });
 
+  }
+
+  ngOnDestroy(): void{
+    // para evitar fuga de memoria
+    this.imgSubscription.unsubscribe();
   }
 
   openHospiform(){
