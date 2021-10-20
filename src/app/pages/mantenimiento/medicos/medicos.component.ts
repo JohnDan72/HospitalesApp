@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Medico } from 'src/app/models/medico.model';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -27,7 +28,8 @@ export class MedicosComponent implements OnInit, OnDestroy {
   constructor(private userService: UsuarioService,
     private modalImgServ: ModalImagenService,
     private mediService: MedicoService,
-    private hospiService: HospitalService) { }
+    private hospiService: HospitalService,
+    private router: Router) { }
     
   ngOnDestroy(): void {
     this.imgSubscription.unsubscribe();
@@ -56,7 +58,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
       hospitales.forEach((hospi, index) => {
         optionsSelect += `<option value="${hospi.id}">${index + 1} - ${hospi.nombre}</option>`;
       });
-      console.log(hospitales);
+      // console.log(hospitales);
       Swal.fire({
         title: 'Nuevo Médico',
         html: `
@@ -133,7 +135,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
       this.maxPages = (this.totalMedicos % this.limit == 0) ? this.totalMedicos / this.limit - 1 : Math.trunc(this.totalMedicos / this.limit);
       this.cargando = false;
 
-      console.log(resp);
+      // console.log(resp);
     }, err => {
       let errorsLabels = ``;
       err.error.errors.forEach(errObj => {
@@ -162,26 +164,8 @@ export class MedicosComponent implements OnInit, OnDestroy {
     this.cargarMedicos();
   }
 
-  updateMedico(medicoToUpdate: Medico) {
-    this.mediService.updateMedico({ nombre: medicoToUpdate.nombre, id_hospital: medicoToUpdate.hospital.id }, medicoToUpdate.id)
-      .subscribe(resp => {
-        console.log(resp);
-        Swal.fire(
-          'Changed',
-          'Medico name was changed!',
-          'success'
-        )
-      }, err => {
-        let errorsLabels = ``;
-        err.error.errors.forEach(errObj => {
-          errorsLabels += `${errObj.msg} `;
-        });
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: errorsLabels
-        })
-      })
+  updateMedico(uid: string) {
+    this.router.navigate(['/dashboard/medico/',uid]);
   }
 
   confirmarBorrado(mediToDelete: Medico) {
@@ -221,7 +205,6 @@ export class MedicosComponent implements OnInit, OnDestroy {
   }
 
   abrirModalImg(medi: Medico) {
-    // console.log(hospi);
     this.modalImgServ.abrirModal('medicos', medi.id, medi.imagenMed)
   }
 

@@ -63,10 +63,10 @@ export class HospitalesComponent implements OnInit, OnDestroy {
       confirmButtonText: 'Crear'
     }).then((result) => {
       if(result.isConfirmed){
-        console.log("Result: ");
-        console.log(result);
+        // console.log("Result: ");
+        // console.log(result);
         this.hospiService.crearNuevoHospital(result.value).subscribe( resp => {
-            console.log(resp);
+            // console.log(resp);
             Swal.fire(
               'Creado!!',
               'Hospital nuevo creado con éxito',
@@ -120,7 +120,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   cambiarNombre( hospi: Hospital ){
     this.hospiService.actualizarNombre( hospi.nombre, hospi.id).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       Swal.fire(
         'Changed',
         'Hospital name was changed!',

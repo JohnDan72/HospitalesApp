@@ -59,7 +59,20 @@ export class HospitalService {
       .get(`${base_url}/hospitales/all`,this.headers)
       .pipe(
         map( (resp: GetAllHospitalesResponse) => {
-          return resp.hospitales;
+          let { hospitales , ...resto } = resp;
+          hospitales = hospitales.map( hospi => {
+            const { nombre , id , createdByUser , img } = hospi;
+            const nombre_U  = createdByUser.nombre;
+            const email_U   = createdByUser.email;
+            const role_U    = createdByUser.role;
+            const img_U     = createdByUser.img || '-';
+            const google_U  = createdByUser.google;
+            const id_U      = createdByUser._id;
+            const userAux = new Usuario(nombre_U,email_U,'',role_U,img_U,google_U,id_U);
+            return new Hospital( nombre , userAux , img , id);
+          });
+
+          return hospitales;
         })
       )
   }

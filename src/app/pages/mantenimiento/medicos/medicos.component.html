@@ -89,7 +89,12 @@
                                     {{medico.hospital.createdByUser.nombre}}
                                 </td>
                                 <td class="text-nowrap text-center">
-                                    <!-- <a *ngIf="medico.id !== sessionData.id" href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                                    <a  class="cursor"
+                                        (click)="updateMedico(medico.id)" 
+                                        data-toggle="tooltip" 
+                                        data-original-title="Edit"> 
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
+                                    </a>
                                     <a class="cursor" 
                                         (click)="confirmarBorrado(medico)" 
                                         data-toggle="tooltip" 

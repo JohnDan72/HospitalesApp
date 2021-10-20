@@ -10,8 +10,5 @@ export interface GetHospitalBusquedaResponse {
 export interface GetAllHospitalesResponse {
     ok: boolean;
     msg: string;
-    hospitales: [{
-        id: string,
-        nombre: string
-    }];
+    hospitales: Hospital[];
 }

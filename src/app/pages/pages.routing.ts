@@ -15,6 +15,7 @@ import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
 import { AdminRoleGuard } from '../guards/admin-role.guard';
 import { HospitalesComponent } from './mantenimiento/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimiento/medicos/medicos.component';
+import { MedicoComponent } from './mantenimiento/medicos/medico/medico.component';
 
 const routes: Routes = [
     { 
@@ -33,6 +34,7 @@ const routes: Routes = [
             { path: 'usuarios' , canActivate: [AdminRoleGuard] , component: UsuariosComponent, data: { titulo: 'Usuarios de App'} },
             { path: 'hospitales' , canActivate: [AdminRoleGuard] , component: HospitalesComponent, data: { titulo: 'Hospitales de App'} },
             { path: 'medicos' , canActivate: [AdminRoleGuard] , component: MedicosComponent, data: { titulo: 'Médicos de App'} },
+            { path: 'medico/:uid' , canActivate: [AdminRoleGuard] , component: MedicoComponent, data: { titulo: 'Médico component'} },
         ]
     },
 ];

@@ -1,0 +1,9 @@
+.current-img{
+    max-height: 350px;
+    max-width: 600px;
+}
+
+.mini-current-img{
+    max-height: 100px;
+    max-width: 100px;
+}
