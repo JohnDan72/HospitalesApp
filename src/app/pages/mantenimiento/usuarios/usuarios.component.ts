@@ -37,7 +37,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.sessionData = this.userService.usuario;
     this.cargarUsuarios();
 
-    this.modalImgServ.nuevaImg.subscribe( ({ uid , img }) => {
+    this.imgSubscription = this.modalImgServ.nuevaImg.subscribe( ({ uid , img }) => {
       // se actualiza solo la img del usuario actual para no cargar de nuevo el servicio
       this.usuarios.find( user => {
         if(user.id == uid){

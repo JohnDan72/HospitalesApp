@@ -6,3 +6,9 @@ export interface GetMedicoBusquedaResponse {
     total: number;
     results: Medico[];
 }
+
+export interface MedicoCreated {
+    ok: boolean;
+    msg: string;
+    medico: Medico;
+}

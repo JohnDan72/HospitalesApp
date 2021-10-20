@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { GetMedicoBusquedaResponse } from '../interfaces/cargar-medicos.interface';
+import { GetMedicoBusquedaResponse, MedicoCreated } from '../interfaces/cargar-medicos.interface';
 import { Hospital } from '../models/hospital.model';
 import { Medico } from '../models/medico.model';
 import { Usuario } from '../models/usuario.model';
@@ -28,7 +28,7 @@ export class MedicoService {
 
   // crear nuevo médico
   createNewMedico(data: { nombre: string, id_hospital: string }) {
-    return this._http.post(`${base_url}/medicos`, data, this.headers);
+    return this._http.post<MedicoCreated>(`${base_url}/medicos`, data, this.headers);
   }
 
   // get médicos

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row animated fadeIn">
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
@@ -30,13 +30,13 @@
                         <label for="hospital_select" class="form-label">Hospital</label>
                         <select class="form-control" 
                                 id="hospital_select"
-                                formControlName="hospital">
+                                formControlName="id_hospital">
                             <option value="" selected>Elije un hospital</option>
                             <option *ngFor="let auxHospi of hospitalesOptions; let ind = index" [value]="auxHospi.id">
                                 ({{ind+1}}) {{auxHospi.nombre}}
                             </option>
                         </select>
-                        <small *ngIf="campoInvalido('hospital')" class="text-danger">Elije un hospital válido</small>
+                        <small *ngIf="campoInvalido('id_hospital')" class="text-danger">Elije un hospital válido</small>
 
                     </div>
 

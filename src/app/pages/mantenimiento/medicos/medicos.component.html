@@ -30,10 +30,16 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 text-right">
+                    <div class="col-auto ml-auto">
                         <button class="btn btn-primary" type="button" (click)="openMedicoForm()">
                             <i class="fa fa-hospital-o"></i>
-                            Nuevo Médico
+                            Nuevo Médico 1
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-secondary" type="button" (click)="crearNuevoMedicoLink()">
+                            <i class="fa fa-hospital-o"></i>
+                            Nuevo Médico 2
                         </button>
                     </div>
                 </div>
@@ -63,12 +69,7 @@
                                             >
                                 </td>
                                 <td>
-                                    <div class="form-group">
-                                        <input  type="text"
-                                                class="form-control" 
-                                                [(ngModel)]="medico.nombre"
-                                                (change)="updateMedico(medico)">
-                                    </div>
+                                    {{medico.nombre}}
                                 </td>
                                 <td>
                                     <img    src="{{ medico.createdByUser.imagenUsr }}"

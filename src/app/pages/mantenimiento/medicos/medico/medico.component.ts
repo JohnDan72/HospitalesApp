@@ -37,11 +37,11 @@ export class MedicoComponent implements OnInit {
   initForm() {
     this.medicoForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      hospital: ['', [Validators.required]]
+      id_hospital: ['', [Validators.required]]
     });
 
-    this.medicoForm.get('hospital').valueChanges.subscribe( id_hospital => {
-      this.hospitalSelected = this.hospitalesOptions.find( h => h.id == id_hospital);
+    this.medicoForm.get('id_hospital').valueChanges.subscribe(id_hospital => {
+      this.hospitalSelected = this.hospitalesOptions.find(h => h.id == id_hospital);
     })
   }
   // cargar hospitales for select
@@ -53,14 +53,14 @@ export class MedicoComponent implements OnInit {
     })
   }
   // cargar médico si existe
-  cargarMedico(){
+  cargarMedico() {
     this.activetedRoute.params.subscribe(params => {
       // console.log(params);
-      if(params.uid !== 'nuevo'){
+      if (params.uid !== 'nuevo') {
         this.medService.getMedicoById(params.uid).subscribe(resp => {
           this.medicoSeleccionado = resp.medico;
           this.medicoForm.get('nombre').setValue(this.medicoSeleccionado.nombre);
-          this.medicoForm.get('hospital').setValue(this.medicoSeleccionado.hospital.id);
+          this.medicoForm.get('id_hospital').setValue(this.medicoSeleccionado.hospital.id);
           // console.log(this.medicoSeleccionado);
         }, err => {
           let errorsLabels = ``;
@@ -88,34 +88,66 @@ export class MedicoComponent implements OnInit {
 
     this.formSubmitted = true;
 
-    if (this.medicoForm.invalid) {
-      console.log("Invalid!!!!");
-    }
-    else {
-      console.log("Success!!");
-    }
-  }
-
-  updateMedico(medicoToUpdate: Medico) {
-    this.medService.updateMedico({ nombre: medicoToUpdate.nombre, id_hospital: medicoToUpdate.hospital.id }, medicoToUpdate.id)
-      .subscribe(resp => {
-        // console.log(resp);
-        Swal.fire(
-          'Changed',
-          'Medico name was changed!',
-          'success'
-        )
-      }, err => {
-        let errorsLabels = ``;
-        err.error.errors.forEach(errObj => {
-          errorsLabels += `${errObj.msg} `;
-        });
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: errorsLabels
+    if (!this.medicoForm.invalid) {
+      if (!this.medicoSeleccionado) { //nuevo médico, crear
+        this.medService.createNewMedico(this.medicoForm.value).subscribe(resp => {
+          const newId = resp.medico.id;
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true
+          });
+          Toast.fire({
+            icon: 'success',
+            title: `Se ha creado un nuevo médico: ${newId}`
+          });
+          setTimeout(() => {
+            this.router.navigateByUrl(`/dashboard/medicos`);
+          }, 3000);
+        }, err => {
+          let errorsLabels = ``;
+          err.error.errors.forEach(errObj => {
+            errorsLabels += `${errObj.msg} `;
+          });
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorsLabels
+          })
         })
-      })
+      }
+      else { //actualizar médico existente
+        this.medService.updateMedico(this.medicoForm.value,this.medicoSeleccionado.id).subscribe(resp => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          });
+          Toast.fire({
+            icon: 'success',
+            title: `Información de ${this.medicoSeleccionado.nombre} actualizada`
+          });
+        }, err => {
+          let errorsLabels = ``;
+          err.error.errors.forEach(errObj => {
+            errorsLabels += `${errObj.msg} `;
+          });
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorsLabels
+          })
+        })
+      }
+    }
   }
 
 }

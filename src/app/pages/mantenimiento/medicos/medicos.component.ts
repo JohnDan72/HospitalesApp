@@ -125,6 +125,10 @@ export class MedicosComponent implements OnInit, OnDestroy {
       })
   }
 
+  crearNuevoMedicoLink(){
+    this.router.navigateByUrl(`/dashboard/medico/nuevo`);
+  }
+
   cargarMedicos() {
     this.cargando = true;
     this.mediService.getMedicosWithBusqueda(this.limit, this.page, this.busqueda).subscribe(resp => {
