@@ -18,6 +18,8 @@ import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
 import { HospitalesComponent } from './mantenimiento/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimiento/medicos/medicos.component';
 import { MedicoComponent } from './mantenimiento/medicos/medico/medico.component';
+import { BusquedasComponent } from './busquedas/busquedas.component';
+import { MiPipesModule } from '../pipes/pipes.module';
 
 
 
@@ -34,7 +36,8 @@ import { MedicoComponent } from './mantenimiento/medicos/medico/medico.component
     UsuariosComponent,
     HospitalesComponent,
     MedicosComponent,
-    MedicoComponent
+    MedicoComponent,
+    BusquedasComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,8 @@ import { MedicoComponent } from './mantenimiento/medicos/medico/medico.component
     SharedModule,
     RouterModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MiPipesModule
   ],
   exports: [
     DashboardComponent,

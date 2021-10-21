@@ -1,0 +1,118 @@
+<div class="row animated fadeIn">
+    <div class="col-12 mb-4">
+        <h5>Resultados de la búsqueda: {{termino}}</h5>
+    </div>
+    <div class="col-12" *ngIf="cargando">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-auto text-center alert alert-info mx-auto">
+                        <h4 class="alert-heading">Cargando</h4>
+                        <i class="fa fa-spin fa-spinner fa-2x"></i>
+                        <div class="mb-0">Por favor espere</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div *ngIf="!cargando" class="col-12 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2>Usuarios</h2>
+                <h4 class="card-title">Total: {{ totalUsuarios }}</h4>
+                <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped color-table primary-table">
+                        <thead >
+                            <tr>
+                                <th class="w100">Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuario of usuarios" >
+                                <td class="text-center">
+                                    <img    src="{{ usuario.img | imgFilter:'usuarios' }}" 
+                                            alt="" 
+                                            srcset=""
+                                            class="mini-img cursor"
+                                            >
+                                </td>
+                                <td>
+                                    {{usuario.nombre}}
+                                </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!cargando" class="col-12 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2>Hospitales</h2>
+                <h4 class="card-title">Total: {{ totalHospitales }}</h4>
+                <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped color-table primary-table">
+                        <thead >
+                            <tr>
+                                <th class="w100">Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospi of hospitales" >
+                                <td class="text-center">
+                                    <img    src="{{ hospi.img | imgFilter:'hospitales' }}" 
+                                            alt="" 
+                                            srcset=""
+                                            class="mini-img cursor"
+                                            >
+                                </td>
+                                <td>
+                                    {{hospi.nombre}}
+                                </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!cargando" class="col-12 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2>Médicos</h2>
+                <h4 class="card-title">Total: {{ totalMedicos }}</h4>
+                <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped color-table primary-table">
+                        <thead >
+                            <tr>
+                                <th class="w100">Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medico of medicos" >
+                                <td class="text-center">
+                                    <img    src="{{ medico.img | imgFilter:'medicos' }}" 
+                                            alt="" 
+                                            srcset=""
+                                            class="mini-img cursor"
+                                            >
+                                </td>
+                                <td>
+                                    {{medico.nombre}}
+                                </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

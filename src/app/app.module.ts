@@ -6,18 +6,19 @@ import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
+import { MiPipesModule } from './pipes/pipes.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PagesModule,
-    AuthModule
+    AuthModule,
+    MiPipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
