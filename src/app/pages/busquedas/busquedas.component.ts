@@ -20,9 +20,10 @@ export class BusquedasComponent implements OnInit {
   
 
   constructor(private activatedRoute: ActivatedRoute,
-    private buscaService: BusquedaService) { }
+              private buscaService: BusquedaService) { }
 
   ngOnInit(): void {
+    // se recupera el paramentro de la url para la búsqueda
     this.activatedRoute.params.subscribe(({ termino }) => {
       this.termino = termino;
       console.log(termino)
@@ -30,9 +31,10 @@ export class BusquedasComponent implements OnInit {
     });
   }
 
+  // cargar todos los usuarios, hospitales y/o médicos que se encuentren con el término ingresado
   cargarAll() {
     this.buscaService.busquedaGlobal(this.termino).subscribe((resp: any) => {
-      console.log(resp);
+      // console.log(resp);
       this.usuarios = resp.usuarios;
       this.hospitales = resp.hospitales;
       this.medicos = resp.medicos;

@@ -6,6 +6,7 @@ import { ModalImagenService } from '../../../services/modal-imagen.service';
 import Swal from 'sweetalert2';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-hospitales',
@@ -26,12 +27,15 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   constructor(private userService: UsuarioService, 
               private modalImgServ: ModalImagenService,
-              private hospiService: HospitalService) { }
+              private hospiService: HospitalService,
+              private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.cargarHospitales()
-    // },3000);
+    this.activeRoute.params.subscribe( resp => {
+      if(resp.termino){
+        this.busqueda = resp.termino
+      }
+    });
     this.sessionData = this.userService.usuario;
     this.cargarHospitales();
 

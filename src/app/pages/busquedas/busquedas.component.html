@@ -24,30 +24,41 @@
             <div class="card-body">
                 <h2>Usuarios</h2>
                 <h4 class="card-title">Total: {{ totalUsuarios }}</h4>
-                <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped color-table primary-table">
-                        <thead >
-                            <tr>
-                                <th class="w100">Avatar</th>
-                                <th>Nombre</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let usuario of usuarios" >
-                                <td class="text-center">
-                                    <img    src="{{ usuario.img | imgFilter:'usuarios' }}" 
-                                            alt="" 
-                                            srcset=""
-                                            class="mini-img cursor"
-                                            >
-                                </td>
-                                <td>
-                                    {{usuario.nombre}}
-                                </td>
-                        </tbody>
-                    </table>
+                <!-- <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6> -->
+                <div class="row" *ngIf="totalUsuarios == 0; else usuariosSuccess">
+                    <div class="col-12">
+                        <div class="alert alert-info" role="alert">
+                            No se encontraron resultados para esta búsqueda
+                        </div>
+                    </div>
                 </div>
+                <ng-template #usuariosSuccess>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped color-table primary-table">
+                            <thead >
+                                <tr>
+                                    <th class="w100">Avatar</th>
+                                    <th>Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let usuario of usuarios" >
+                                    <td class="text-center">
+                                        <img    src="{{ usuario.img | imgFilter:'usuarios' }}" 
+                                                alt="" 
+                                                srcset=""
+                                                class="mini-img cursor"
+                                                >
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['/dashboard/usuarios/',usuario.nombre]" class="btn mibtn">
+                                            {{usuario.nombre}}
+                                        </a>
+                                    </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>
@@ -56,30 +67,42 @@
             <div class="card-body">
                 <h2>Hospitales</h2>
                 <h4 class="card-title">Total: {{ totalHospitales }}</h4>
-                <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped color-table primary-table">
-                        <thead >
-                            <tr>
-                                <th class="w100">Avatar</th>
-                                <th>Nombre</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let hospi of hospitales" >
-                                <td class="text-center">
-                                    <img    src="{{ hospi.img | imgFilter:'hospitales' }}" 
-                                            alt="" 
-                                            srcset=""
-                                            class="mini-img cursor"
-                                            >
-                                </td>
-                                <td>
-                                    {{hospi.nombre}}
-                                </td>
-                        </tbody>
-                    </table>
+                <!-- <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6> -->
+                <div class="row" *ngIf="totalHospitales == 0; else hospitalesSuccess">
+                    <div class="col-12">
+                        <div class="alert alert-info" role="alert">
+                            No se encontraron resultados para esta búsqueda
+                        </div>
+                    </div>
                 </div>
+                <ng-template #hospitalesSuccess>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped color-table primary-table">
+                            <thead >
+                                <tr>
+                                    <th class="w100">Avatar</th>
+                                    <th>Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let hospi of hospitales" >
+                                    <td class="text-center">
+                                        <img    src="{{ hospi.img | imgFilter:'hospitales' }}" 
+                                                alt="" 
+                                                srcset=""
+                                                class="mini-img cursor"
+                                                >
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['/dashboard/hospitales/',hospi.nombre]" class="btn mibtn">
+                                            {{hospi.nombre}}
+                                        </a>
+                                    </td>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </ng-template>
             </div>
         </div>
     </div>
@@ -88,30 +111,42 @@
             <div class="card-body">
                 <h2>Médicos</h2>
                 <h4 class="card-title">Total: {{ totalMedicos }}</h4>
-                <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped color-table primary-table">
-                        <thead >
-                            <tr>
-                                <th class="w100">Avatar</th>
-                                <th>Nombre</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let medico of medicos" >
-                                <td class="text-center">
-                                    <img    src="{{ medico.img | imgFilter:'medicos' }}" 
-                                            alt="" 
-                                            srcset=""
-                                            class="mini-img cursor"
-                                            >
-                                </td>
-                                <td>
-                                    {{medico.nombre}}
-                                </td>
-                        </tbody>
-                    </table>
+                <!-- <h6 class="card-subtitle">Current page: {{ 0 + 1 }}</h6> -->
+                <div class="row" *ngIf="totalMedicos == 0; else medicosSuccess" >
+                    <div class="col-12">
+                        <div class="alert alert-info" role="alert">
+                            No se encontraron resultados para esta búsqueda
+                        </div>
+                    </div>
                 </div>
+                <ng-template #medicosSuccess>
+                    <div class="table-responsive" >
+                        <table class="table table-bordered table-striped color-table primary-table">
+                            <thead >
+                                <tr>
+                                    <th class="w100">Avatar</th>
+                                    <th>Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let medico of medicos" >
+                                    <td class="text-center">
+                                        <img    src="{{ medico.img | imgFilter:'medicos' }}" 
+                                                alt="" 
+                                                srcset=""
+                                                class="mini-img cursor"
+                                                >
+                                    </td>
+                                    <td>
+                                        
+                                        <a [routerLink]="['/dashboard/medico/',medico.id]" class="btn mibtn">
+                                            {{medico.nombre}}
+                                        </a>
+                                    </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>

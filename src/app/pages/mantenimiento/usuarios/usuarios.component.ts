@@ -4,6 +4,7 @@ import { Usuario } from '../../../models/usuario.model';
 import { UsuarioService } from '../../../services/usuario.service';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -24,16 +25,20 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   public imgSubscription: Subscription;
 
 
-  constructor(private userService: UsuarioService, private modalImgServ: ModalImagenService) { }
+  constructor(private userService: UsuarioService, 
+              private modalImgServ: ModalImagenService,
+              private activeRoute: ActivatedRoute) { }
 
   ngOnDestroy(): void {
     this.imgSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.cargarUsuarios()
-    // },3000);
+    this.activeRoute.params.subscribe( resp => {
+      if(resp.termino){
+        this.busqueda = resp.termino
+      }
+    });
     this.sessionData = this.userService.usuario;
     this.cargarUsuarios();
 

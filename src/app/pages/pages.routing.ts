@@ -33,7 +33,9 @@ const routes: Routes = [
             { path: 'perfil' , component: PerfilComponent, data: { titulo: 'Perfil'} },
             // Mantenimiento
             { path: 'usuarios' , canActivate: [AdminRoleGuard] , component: UsuariosComponent, data: { titulo: 'Usuarios de App'} },
+            { path: 'usuarios/:termino' , canActivate: [AdminRoleGuard] , component: UsuariosComponent, data: { titulo: 'Usuarios de App'} },
             { path: 'hospitales' , canActivate: [AdminRoleGuard] , component: HospitalesComponent, data: { titulo: 'Hospitales de App'} },
+            { path: 'hospitales/:termino' , canActivate: [AdminRoleGuard] , component: HospitalesComponent, data: { titulo: 'Hospitales de App'} },
             { path: 'medicos' , canActivate: [AdminRoleGuard] , component: MedicosComponent, data: { titulo: 'Médicos de App'} },
             { path: 'medico/:uid' , canActivate: [AdminRoleGuard] , component: MedicoComponent, data: { titulo: 'Médico component'} },
             // busquedas
