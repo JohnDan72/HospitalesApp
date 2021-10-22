@@ -15,20 +15,16 @@ export class SidebarComponent implements OnInit {
   @Input() usuario: Usuario;
 
   constructor(private sidebarSevice: SidebarService,
-              private userService: UsuarioService) { 
-    this.menuItems = sidebarSevice.menu;
+    private userService: UsuarioService) {
+
     // this.usuario = userService.usuario.imagenUsr;
+    this.sidebarSevice.cargarMenu().subscribe((resp: any) => {
+      this.menuItems = resp.sidebarMenu
+    }, err => {
+      console.log(err);
+    })
   }
 
-  ngOnInit(): void {
-  }
-
-  checarRole( titulo: string ){
-    if( titulo == 'Usuarios'){
-      if( this.usuario.role != 'ADMIN_ROLE')
-        return false;
-    }
-    return true;
-  }
+  ngOnInit(): void {}
 
 }

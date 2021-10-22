@@ -6,7 +6,7 @@ const base_url = environment.base_url;
 })
 export class ImgFilterPipe implements PipeTransform {
 
-  transform(imgName: string = '', tipo: 'usuarios'|'hospitales'|'medicos'): string {
+  transform(imgName: string = '-', tipo: 'usuarios'|'hospitales'|'medicos'): string {
 
     return (imgName && imgName.startsWith('https://')) ? 
             imgName : `${base_url}/upload/?tipo=${tipo}&imagenName=${imgName}`;

@@ -1,32 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
+const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
 
-  public menu: any[] = [
-    {
-      titulo: 'Dashboard!!',
-      icono: 'mdi mdi-gauge',
-      submenu: [
-        { titulo: 'Main' , url: '/'},
-        { titulo: 'Progress' , url: '/dashboard/progress'},
-        { titulo: 'Gráfica' , url: '/dashboard/grafica1'},
-        { titulo: 'Promesas' , url: '/dashboard/promesas'},
-        { titulo: 'RXJS' , url: '/dashboard/rxjs'}
-      ]
-    },
-    {
-      titulo: 'Mantenimiento',
-      icono: 'mdi mdi-folder-lock-open',
-      submenu: [
-        { titulo: 'Usuarios' , url: '/dashboard/usuarios'},
-        { titulo: 'Hospitales' , url: '/dashboard/hospitales'},
-        { titulo: 'Medicos' , url: '/dashboard/medicos'}
-      ]
-    }
-  ]
+  public menu: any[] = [];
 
-  constructor() { }
+  constructor(private _http: HttpClient) {}
+  get token(){return localStorage.getItem('token') || '';}
+  get headers(){
+    return {
+      headers: {
+        'Authorization': this.token
+      }
+    }
+  }
+  // cargar menu conforme al role que tiene el usuario
+  cargarMenu(){
+    return this._http.get(`${base_url}/login/sidebarMenu`,this.headers);
+  }
 }

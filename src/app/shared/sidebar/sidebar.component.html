@@ -37,8 +37,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse">
                         <li *ngFor="let subitem of item.submenu;">
-                            <a  *ngIf="checarRole(subitem.titulo)"
-                                [routerLink]="subitem.url" 
+                            <a  [routerLink]="subitem.url" 
                                 routerLinkActive="active"
                                 [routerLinkActiveOptions]="{ exact: true}" >{{subitem.titulo}} </a>
                         </li>
