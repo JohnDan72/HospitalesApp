@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from "src/environments/environment.prod";
 import { GetMedicoBusquedaResponse, MedicoCreated } from '../interfaces/cargar-medicos.interface';
 import { Hospital } from '../models/hospital.model';
 import { Medico } from '../models/medico.model';
