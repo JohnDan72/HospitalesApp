@@ -25,8 +25,8 @@
                 </li>
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
-                <li *ngFor="let item of menuItems;">
-                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                <li *ngFor="let item of menuItems; let ind = index">
+                    <a class="has-arrow waves-effect waves-dark" data-toggle="collapse" href="#menu{{ind}}" aria-expanded="false">
                         <i [class]="item.icono"></i>
                         <span class="hide-menu">
                             {{item.titulo}} 
@@ -35,7 +35,7 @@
                             </span>
                         </span>
                     </a>
-                    <ul aria-expanded="false" class="collapse">
+                    <ul aria-expanded="false" class="collapse" id="menu{{ind}}">
                         <li *ngFor="let subitem of item.submenu;">
                             <a  [routerLink]="subitem.url" 
                                 routerLinkActive="active"
