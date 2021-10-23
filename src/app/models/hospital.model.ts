@@ -7,13 +7,14 @@ export class Hospital {
     constructor(
         public nombre: string,
         public createdByUser: Usuario,
-        public img: string = '-',
+        public img: string = '',
         public id?: string,
         public _id?: string
     ) { }
 
     get imagenHospi(){
-        return `${base_url}/upload/?tipo=hospitales&imagenName=${this.img}`;
+        return (this.img) ? 
+            this.img : `../../assets/images/no-photo.png`;
         
     }
 }

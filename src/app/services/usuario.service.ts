@@ -126,7 +126,7 @@ export class UsuarioService {
         map(resp => {
           let { usuarios, ...data } = resp;
           usuarios = usuarios.map(user => {
-            const { nombre , email, role , img='-', google , id } = user;
+            const { nombre , email, role , img='', google , id } = user;
             return new Usuario(nombre , email , '' , role , img , google , id);
           });
           return {

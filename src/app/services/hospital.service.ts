@@ -42,7 +42,7 @@ export class HospitalService {
             const nombre_U  = createdByUser.nombre;
             const email_U   = createdByUser.email;
             const role_U    = createdByUser.role;
-            const img_U     = createdByUser.img || '-';
+            const img_U     = createdByUser.img || '';
             const google_U  = createdByUser.google;
             const id_U      = createdByUser._id;
             const userAux = new Usuario(nombre_U,email_U,'',role_U,img_U,google_U,id_U);
