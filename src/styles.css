@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+.allHeighWidth {
+  height: 100%;
+  width: 100%;
+}
 .fast {
   -webkit-animation-duration: .2s;
   animation-duration: .2s;
