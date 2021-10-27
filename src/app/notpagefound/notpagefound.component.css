@@ -3,8 +3,8 @@
 }
 
 #medicalWrapper{
-    max-width: 512px;
-    border-radius: 5%;
+    /* max-width: 512px; */
+    border-radius: 3%;
 }
 
 .v-a-items{
@@ -13,8 +13,10 @@
     align-items: center;
 }
 
-@media (max-width: 700px) {
+
+@media screen and (max-width: 767px) {
     .v-a-items {
         height: 100%;
+        display: unset;
     }
-  }
+}
