@@ -32,3 +32,8 @@
 .hide{
   display: none;
 }
+
+.v-a-middle{
+  display: flex;
+  align-items: center;
+}
