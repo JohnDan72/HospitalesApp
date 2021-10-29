@@ -13,7 +13,7 @@ declare function miCustomFunction();
   ]
 })
 export class PagesComponent implements OnInit {
-
+  year = new Date().getFullYear();
   usuarioSession: Usuario;
   constructor(private settingService: SettingsService,
               private userService: UsuarioService,
