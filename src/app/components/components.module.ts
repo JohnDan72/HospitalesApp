@@ -7,6 +7,7 @@ import { IncrementadorComponent } from './incrementador/incrementador.component'
 import { FormsModule } from '@angular/forms';
 import { DonutComponent } from './donut/donut.component';
 import { ModalImgComponent } from './modal-img/modal-img.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
 
 
 
@@ -14,7 +15,8 @@ import { ModalImgComponent } from './modal-img/modal-img.component';
   declarations: [
     IncrementadorComponent,
     DonutComponent,
-    ModalImgComponent
+    ModalImgComponent,
+    LineChartComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ModalImgComponent } from './modal-img/modal-img.component';
   exports: [
     IncrementadorComponent,
     DonutComponent,
-    ModalImgComponent
+    ModalImgComponent,
+    LineChartComponent
   ]
 })
 export class ComponentsModule { }

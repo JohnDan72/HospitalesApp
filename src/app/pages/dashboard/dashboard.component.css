@@ -6,7 +6,7 @@
 }
 
 .feature-text{
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .card{
@@ -21,31 +21,31 @@
     padding-right: 0px;
 }
 #imgRes1{
-	background: url("https://pixabay.com/get/gadae48d0dc41a4217794393821141c1dd04cee4a9f679d780cab71e84af3db15b9f80c010f77a6c08f13f677968a12d6.png");
+	background: url("../../../assets/images/medical_1.png");
     background-position: center;
     background-attachment: contain;
     background-size: cover;
     background-color: rgb(51 51 51 / 20%);
     background-blend-mode: multiply;
-    height: 300px;
+    height: 400px;
 }
 #imgRes2{
-	background: url("https://pixabay.com/get/gae67234b67290a099dc21f1a6f0eee96294c0a171d0795c69fe4a416037142cf6c3d38b9b20d8ee622f6d39243f06590d63c52cff59fd3e2d10417e15ee0105e_1280.png");
+	background: url("../../../assets/images/medical_2.png");
     background-position: center;
     background-attachment: contain;
     background-size: cover;
     background-color: rgb(51 51 51 / 20%);
     background-blend-mode: multiply;
-    height: 300px;
+    height: 400px;
 }
 #imgRes3{
-	background: url("https://pixabay.com/get/g2505a311d0a01756cb637e3517340379efcce65fb8cd2c8a9bca234f1d598d5e6a1f01496cb75790e1ff1a61cfab0faa0319355bc89bf3deec67de5182315f41_1280.png");
+	background: url("../../../assets/images/medical_3.png");
     background-position: center;
     background-attachment: contain;
     background-size: cover;
     background-color: rgb(51 51 51 / 20%);
     background-blend-mode: multiply;
-    height: 300px;
+    height: 400px;
 }
 .carousel-caption h4, .carousel-caption p{
     color: #fefefe;
