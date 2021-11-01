@@ -14,16 +14,16 @@ export class RegisterComponent {
 
   public registerForm: FormGroup = this.fb.group(
     {
-      nombre: ['asd', [
+      nombre: ['', [
         Validators.required,
         Validators.minLength(3),]],
-      email: ['asd@gmail.com', [
+      email: ['', [
         Validators.required,]],
-      password: ['asdasd', [
+      password: ['', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(25)]],
-      password2: ['asdasd', [
+      password2: ['', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(25)],

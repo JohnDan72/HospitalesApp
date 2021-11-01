@@ -29,4 +29,9 @@
       right: 0px;
       position: absolute;
       height: 100%; }
+
+.google-btn {
+  display: flex;
+    justify-content: center;
+}
   
