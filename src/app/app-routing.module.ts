@@ -4,6 +4,7 @@ import { PagesRoutingModule } from './pages/pages.routing';
 import { AuthRoutingModule } from './auth/auth.routing';
 
 import { NotpagefoundComponent } from './notpagefound/notpagefound.component';
+import { WorkingOnItComponent } from './working-on-it/working-on-it.component';
 
 const routes: Routes = [
 
@@ -11,7 +12,7 @@ const routes: Routes = [
   // path: '/auth' AuthRouting
 
   { path: '' , redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '**' , component: NotpagefoundComponent },
+  { path: '**' , component: WorkingOnItComponent },
 ]
 
 @NgModule({
