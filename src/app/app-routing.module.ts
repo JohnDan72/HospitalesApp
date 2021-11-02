@@ -3,16 +3,16 @@ import { RouterModule, Routes } from "@angular/router";
 import { PagesRoutingModule } from './pages/pages.routing';
 import { AuthRoutingModule } from './auth/auth.routing';
 
-import { NotpagefoundComponent } from './notpagefound/notpagefound.component';
-import { WorkingOnItComponent } from './working-on-it/working-on-it.component';
+import { NotpagefoundComponent } from './notfound/notpagefound/notpagefound.component';
+import { WorkingOnItComponent } from './notfound/working-on-it/working-on-it.component';
 
 const routes: Routes = [
 
   // path: '/dashboard' PagesRouting
   // path: '/auth' AuthRouting
-
+  { path: 'workingonit', component: WorkingOnItComponent },
   { path: '' , redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '**' , component: WorkingOnItComponent },
+  { path: '**' , component: NotpagefoundComponent },
 ]
 
 @NgModule({

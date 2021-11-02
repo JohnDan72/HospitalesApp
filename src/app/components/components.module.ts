@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { DonutComponent } from './donut/donut.component';
 import { ModalImgComponent } from './modal-img/modal-img.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
+import { CentralCardComponent } from './central-card/central-card.component';
 
 
 
@@ -16,7 +17,8 @@ import { LineChartComponent } from './line-chart/line-chart.component';
     IncrementadorComponent,
     DonutComponent,
     ModalImgComponent,
-    LineChartComponent
+    LineChartComponent,
+    CentralCardComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { LineChartComponent } from './line-chart/line-chart.component';
     IncrementadorComponent,
     DonutComponent,
     ModalImgComponent,
-    LineChartComponent
+    LineChartComponent,
+    CentralCardComponent
   ]
 })
 export class ComponentsModule { }

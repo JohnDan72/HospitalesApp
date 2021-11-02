@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { MiPipesModule } from './pipes/pipes.module';
+import { ComponentsModule } from './components/components.module';
+import { NotFoundModule } from './notfound/notfound.module';
 
 
 @NgModule({
@@ -16,9 +18,11 @@ import { MiPipesModule } from './pipes/pipes.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ComponentsModule,
     PagesModule,
     AuthModule,
-    MiPipesModule
+    MiPipesModule,
+    NotFoundModule
   ],
   providers: [],
   bootstrap: [AppComponent]
