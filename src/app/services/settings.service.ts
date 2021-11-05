@@ -8,7 +8,7 @@ export class SettingsService {
   public mainTheme = document.querySelector("#theme");
 
   constructor() { 
-    const themeUrl: string = (localStorage.getItem('theme')) ? localStorage.getItem('theme') : `./assets/css/colors/default.css`;
+    const themeUrl: string = (localStorage.getItem('theme')) ? localStorage.getItem('theme') : `./assets/css/colors/blue-dark.css`;
     document.querySelector('#theme').setAttribute('href',themeUrl);
   }
 
