@@ -1,89 +1,92 @@
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Perfil de usuario</h4>
-                <h6 class="card-subtitle">Ajustes</h6>
-                <form   class="form p-t-20" 
-                        [formGroup]="perfilForm"
-                        (ngSubmit)="guardarCambios()">
-                    <div class="form-group">
-                        <label for="exampleInputuname">User Name</label>
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-user"></i></div>
-                            <input  type="text" 
-                                    class="form-control" 
-                                    id="exampleInputuname" 
-                                    placeholder="Nombre del usuario"
-                                    formControlName="nombre">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Perfil de usuario</h4>
+                    <h6 class="card-subtitle">Ajustes</h6>
+                    <form   class="form p-t-20" 
+                            [formGroup]="perfilForm"
+                            (ngSubmit)="guardarCambios()">
+                        <div class="form-group">
+                            <label for="exampleInputuname">User Name</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                <input  type="text" 
+                                        class="form-control" 
+                                        id="exampleInputuname" 
+                                        placeholder="Nombre del usuario"
+                                        formControlName="nombre">
+                            </div>
+                            <small *ngIf="campoInvalido('nombre')" class="text-danger">Campo requerido (de 3 a 25 chars)</small>
                         </div>
-                        <small *ngIf="campoInvalido('nombre')" class="text-danger">Campo requerido (de 3 a 25 chars)</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input  type="email" 
-                                    class="form-control" 
-                                    id="exampleInputEmail1" 
-                                    placeholder="Enter email"
-                                    formControlName="email"
-                                    [readonly]="usuario.google">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-email"></i></div>
+                                <input  type="email" 
+                                        class="form-control" 
+                                        id="exampleInputEmail1" 
+                                        placeholder="Enter email"
+                                        formControlName="email"
+                                        [readonly]="usuario.google">
+                            </div>
+                            <small *ngIf="campoInvalido('email')" class="text-danger">Email incorrecto</small>
+    
                         </div>
-                        <small *ngIf="campoInvalido('email')" class="text-danger">Email incorrecto</small>
-
-                    </div>
-                
-                    <button     type="submit" 
-                                class="btn btn-success waves-effect waves-light m-r-10"
-                                >
-                        <i class="fa fa-save mx-1"></i>
-                        Guardar cambios
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Avatar</h4>
-                <h6 class="card-subtitle">Imagen del usuario</h6>
-                <div class="row">
-                    <div class="col-12 mb-4 text-center">
-                        <img    *ngIf="!imgTemp" 
-                                [src]="usuario.imagenUsr" 
-                                alt="" 
-                                srcset=""
-                                class="current-img">
-                        <img    *ngIf="imgTemp"
-                                [src]="imgTemp" 
-                                alt="" 
-                                srcset=""
-                                class="current-img">
-
-                    </div>
-                    <div class="col-12 mb-4">
-                        <input  type="file" 
-                                placeholder="elige imagen"
-                                (change)="cambiarImg($event.target.files[0])">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" 
-                                class="btn btn-success waves-effect waves-light m-r-10"
-                                [disabled]="!imgFile"
-                                (click)="subirImg()">
+                    
+                        <button     type="submit" 
+                                    class="btn btn-success waves-effect waves-light m-r-10"
+                                    >
                             <i class="fa fa-save mx-1"></i>
-                            Cambiar imagen
+                            Guardar cambios
                         </button>
-
-                    </div>
+                    </form>
                 </div>
-                
-                
-
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Avatar</h4>
+                    <h6 class="card-subtitle">Imagen del usuario</h6>
+                    <div class="row">
+                        <div class="col-12 mb-4 text-center">
+                            <img    *ngIf="!imgTemp" 
+                                    [src]="usuario.imagenUsr" 
+                                    alt="" 
+                                    srcset=""
+                                    class="current-img">
+                            <img    *ngIf="imgTemp"
+                                    [src]="imgTemp" 
+                                    alt="" 
+                                    srcset=""
+                                    class="current-img">
+    
+                        </div>
+                        <div class="col-12 mb-4">
+                            <input  type="file" 
+                                    placeholder="elige imagen"
+                                    (change)="cambiarImg($event.target.files[0])">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" 
+                                    class="btn btn-success waves-effect waves-light m-r-10"
+                                    [disabled]="!imgFile"
+                                    (click)="subirImg()">
+                                <i class="fa fa-save mx-1"></i>
+                                Cambiar imagen
+                            </button>
+    
+                        </div>
+                    </div>
+                    
+                    
+    
+                </div>
             </div>
         </div>
     </div>
+
 </div>

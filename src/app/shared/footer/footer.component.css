@@ -1,7 +1,11 @@
 .footerLink{
     color: #fefefe;
+    
+    transition: transform 0.3s;
+    
 }
 
 .footerLink:hover{
-    color: #ddd;
+    transform: scale(1.3);
 }
+

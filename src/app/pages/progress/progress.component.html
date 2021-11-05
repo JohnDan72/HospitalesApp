@@ -1,43 +1,46 @@
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Striped Progress bar</h4>
-                <div class="progress m-t-20">
-                    <div    class="progress-bar bg-info progress-bar-striped active" 
-                            style="height: 10px" 
-                            [style.width]="getProgreso(1)"
-                            role="progressbar">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Striped Progress bar</h4>
+                    <div class="progress m-t-20">
+                        <div    class="progress-bar bg-info progress-bar-striped active" 
+                                style="height: 10px" 
+                                [style.width]="getProgreso(1)"
+                                role="progressbar">
+                        </div>
+                    </div>
+                    <div class="progress m-t-20">
+                        <div    class="progress-bar bg-info progress-bar-striped active" 
+                                style="height: 10px" 
+                                [style.width]="getProgreso(2)"
+                                role="progressbar">
+                        </div>
                     </div>
                 </div>
-                <div class="progress m-t-20">
-                    <div    class="progress-bar bg-info progress-bar-striped active" 
-                            style="height: 10px" 
-                            [style.width]="getProgreso(2)"
-                            role="progressbar">
-                    </div>
+            </div>
+        </div>
+        
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <app-incrementador  [renombrado]="progreso1"
+                                        (valorSalida)=" progreso1 = $event">       
+                    </app-incrementador>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <app-incrementador  [renombrado]="progreso2"
+                                        [btnClass]="'btn-info'"
+                                        (valorSalida)=" progreso2 = $event">
+                    </app-incrementador>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="col-6">
-        <div class="card">
-            <div class="card-body">
-                <app-incrementador  [renombrado]="progreso1"
-                                    (valorSalida)=" progreso1 = $event">       
-                </app-incrementador>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="card">
-            <div class="card-body">
-                <app-incrementador  [renombrado]="progreso2"
-                                    [btnClass]="'btn-info'"
-                                    (valorSalida)=" progreso2 = $event">
-                </app-incrementador>
-            </div>
-        </div>
-    </div>
+
 </div>

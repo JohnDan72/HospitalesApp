@@ -1,92 +1,95 @@
-<div class="row animated fadeIn">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div *ngIf="cargando" class="col-auto text-center alert alert-info mx-auto">
-                        <h4 class="alert-heading">Cargando</h4>
-                        <i class="fa fa-spin fa-spinner fa-2x"></i>
-                        <div class="mb-0">Por favor espere</div>
+<div class="container">
+    <div class="row animated fadeIn">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div *ngIf="cargando" class="col-auto text-center alert alert-info mx-auto">
+                            <h4 class="alert-heading">Cargando</h4>
+                            <i class="fa fa-spin fa-spinner fa-2x"></i>
+                            <div class="mb-0">Por favor espere</div>
+                        </div>
+                        <div class="col-12">
+                            <input  type="text" 
+                                    class="form-control"
+                                    placeholder="Busca un usuario"
+                                    #id_busqueda
+                                    (keyup)="buscarPorCadena(id_busqueda.value)"
+    
+                                    >
+                        </div>
                     </div>
-                    <div class="col-12">
-                        <input  type="text" 
-                                class="form-control"
-                                placeholder="Busca un usuario"
-                                #id_busqueda
-                                (keyup)="buscarPorCadena(id_busqueda.value)"
-
-                                >
-                    </div>
+    
                 </div>
-
+            </div>
+        </div>
+        <div *ngIf="!cargando" class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Total: {{totalUsuarios}}</h4>
+                    <h6 class="card-subtitle">Usuarios registrados en la app</h6>
+                    <h6 class="card-subtitle">Current page: {{ page }}</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped color-table primary-table">
+                            <thead >
+                                <tr>
+                                    <th class="w100">Avatar</th>
+                                    <th>Nombre</th>
+                                    <th class="w-100">Role</th>
+                                    <th>Email</th>
+                                    <th>Auth</th>
+                                    <th class="text-nowrap w100">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of usuarios" >
+                                    <td class="text-center">
+                                        <img    src="{{ user.imagenUsr }}" 
+                                                alt="" 
+                                                srcset=""
+                                                class="mini-img cursor"
+                                                (click)="abrirModalImg(user)"
+                                                >
+                                    </td>
+                                    <td>{{user.nombre}}</td>
+                                    <td>
+                                        <div *ngIf="user.id !== sessionData.id" class="form-group">
+                                            <select     class="custom-select col-12" 
+                                                        id="inlineFormCustomSelect"
+                                                        [(ngModel)]="user.role"
+                                                        (change)="cambiarRole(user)">
+                                                <option value="USER_ROLE">USER</option>
+                                                <option value="ADMIN_ROLE">ADMIN</option>
+                                            </select>
+                                        </div>
+                                        <div *ngIf="user.id === sessionData.id">
+                                            ADMIN (tú)
+                                        </div>
+                                    </td>
+                                    <td>{{user.email}}</td>
+                                    <td>
+                                        <div *ngIf="user.google" class="label label-table label-primary">Google</div>
+                                        <div *ngIf="!user.google" class="label label-table label-success">Normal</div>
+                                    </td>
+                                    <td class="text-nowrap text-center">
+                                        <a *ngIf="user.id !== sessionData.id"  class="cursor" 
+                                            (click)="confirmarBorrado(user)" 
+                                            data-toggle="tooltip" 
+                                            data-original-title="Close"> 
+                                            <i class="fa fa-close text-danger"></i> 
+                                        </a>
+                                        <div *ngIf="user.id === sessionData.id" class="label label-table label-primary">Tú</div>
+    
+                                    </td>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <button *ngIf="page > 0" class="btn btn-secondary" (click)="cambiarPagina(-1)">Anterior</button>
+                    <button *ngIf="page < maxPages" class="btn btn-secondary mr-3" (click)="cambiarPagina(1)">Sguiente</button>
+                </div>
             </div>
         </div>
     </div>
-    <div *ngIf="!cargando" class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Total: {{totalUsuarios}}</h4>
-                <h6 class="card-subtitle">Usuarios registrados en la app</h6>
-                <h6 class="card-subtitle">Current page: {{ page }}</h6>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped color-table primary-table">
-                        <thead >
-                            <tr>
-                                <th class="w100">Avatar</th>
-                                <th>Nombre</th>
-                                <th class="w-100">Role</th>
-                                <th>Email</th>
-                                <th>Auth</th>
-                                <th class="text-nowrap w100">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let user of usuarios" >
-                                <td class="text-center">
-                                    <img    src="{{ user.imagenUsr }}" 
-                                            alt="" 
-                                            srcset=""
-                                            class="mini-img cursor"
-                                            (click)="abrirModalImg(user)"
-                                            >
-                                </td>
-                                <td>{{user.nombre}}</td>
-                                <td>
-                                    <div *ngIf="user.id !== sessionData.id" class="form-group">
-                                        <select     class="custom-select col-12" 
-                                                    id="inlineFormCustomSelect"
-                                                    [(ngModel)]="user.role"
-                                                    (change)="cambiarRole(user)">
-                                            <option value="USER_ROLE">USER</option>
-                                            <option value="ADMIN_ROLE">ADMIN</option>
-                                        </select>
-                                    </div>
-                                    <div *ngIf="user.id === sessionData.id">
-                                        ADMIN (tú)
-                                    </div>
-                                </td>
-                                <td>{{user.email}}</td>
-                                <td>
-                                    <div *ngIf="user.google" class="label label-table label-primary">Google</div>
-                                    <div *ngIf="!user.google" class="label label-table label-success">Normal</div>
-                                </td>
-                                <td class="text-nowrap text-center">
-                                    <a *ngIf="user.id !== sessionData.id"  class="cursor" 
-                                        (click)="confirmarBorrado(user)" 
-                                        data-toggle="tooltip" 
-                                        data-original-title="Close"> 
-                                        <i class="fa fa-close text-danger"></i> 
-                                    </a>
-                                    <div *ngIf="user.id === sessionData.id" class="label label-table label-primary">Tú</div>
-
-                                </td>
-                            
-                        </tbody>
-                    </table>
-                </div>
-                <button *ngIf="page > 0" class="btn btn-secondary" (click)="cambiarPagina(-1)">Anterior</button>
-                <button *ngIf="page < maxPages" class="btn btn-secondary mr-3" (click)="cambiarPagina(1)">Sguiente</button>
-            </div>
-        </div>
-    </div>
+    
 </div>
