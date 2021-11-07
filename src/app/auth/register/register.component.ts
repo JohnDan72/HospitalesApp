@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuario.service';
 // ES6 Modules or TypeScript
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
 
   public registerForm: FormGroup = this.fb.group(
     {
@@ -41,8 +41,16 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder, 
               private userService: UsuarioService,
               private _router: Router) { 
-    
+                document.querySelector('html').className = "allHeighWidth";
+                document.body.className = "allHeighWidth";
   }
+  ngOnInit(): void {}
+  
+  ngOnDestroy() {
+    document.querySelector('html').className = "";
+    document.body.className = "";
+  }
+
 
   registrarUsuario() {
     this.formSubmitted = true;

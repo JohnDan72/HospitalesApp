@@ -1,74 +1,77 @@
-<div class="row animated fadeIn">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Médico</h4>
-                <h6 class="card-subtitle">Ajustes</h6>
-                <form   class="row form p-t-20" 
-                        [formGroup]="medicoForm"
-                        (ngSubmit)="guardarCambios()">
-                    <div class="col-12 my-3 text-center">
-                        <img    *ngIf="medicoSeleccionado" 
-                                [src]="medicoSeleccionado.imagenMed" 
-                                alt="" 
-                                srcset=""
-                                class="mini-current-img">
-                    </div>
-                    <div class="col-12 form-group">
-                        <label for="exampleInputuname">Nombre médico</label>
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-user"></i></div>
-                            <input  type="text" 
-                                    class="form-control" 
-                                    id="exampleInputuname" 
-                                    placeholder="Nombre del médico"
-                                    formControlName="nombre">
+<div class="container">
+    <div class="row animated fadeIn">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Médico</h4>
+                    <h6 class="card-subtitle">Ajustes</h6>
+                    <form   class="row form p-t-20" 
+                            [formGroup]="medicoForm"
+                            (ngSubmit)="guardarCambios()">
+                        <div class="col-12 my-3 text-center">
+                            <img    *ngIf="medicoSeleccionado" 
+                                    [src]="medicoSeleccionado.imagenMed" 
+                                    alt="" 
+                                    srcset=""
+                                    class="mini-current-img">
                         </div>
-                        <small *ngIf="campoInvalido('nombre')" class="text-danger">Campo requerido (de 3 a 25 chars)</small>
-                    </div>
-                    <div class="col-12 form-group">
-                        <label for="hospital_select" class="form-label">Hospital</label>
-                        <select class="form-control" 
-                                id="hospital_select"
-                                formControlName="id_hospital">
-                            <option value="" selected>Elije un hospital</option>
-                            <option *ngFor="let auxHospi of hospitalesOptions; let ind = index" [value]="auxHospi.id">
-                                ({{ind+1}}) {{auxHospi.nombre}}
-                            </option>
-                        </select>
-                        <small *ngIf="campoInvalido('id_hospital')" class="text-danger">Elije un hospital válido</small>
-
-                    </div>
-
-                    <div class="col-12">
-                        <button     type="submit" 
-                                    class="btn btn-success waves-effect waves-light m-r-10"
-                                    >
-                            <i class="fa fa-save mx-1"></i>
-                            Guardar cambios
-                        </button>
-                    </div>
-                
-                </form>
+                        <div class="col-12 form-group">
+                            <label for="exampleInputuname">Nombre médico</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                <input  type="text" 
+                                        class="form-control" 
+                                        id="exampleInputuname" 
+                                        placeholder="Nombre del médico"
+                                        formControlName="nombre">
+                            </div>
+                            <small *ngIf="campoInvalido('nombre')" class="text-danger">Campo requerido (de 3 a 25 chars)</small>
+                        </div>
+                        <div class="col-12 form-group">
+                            <label for="hospital_select" class="form-label">Hospital</label>
+                            <select class="form-control" 
+                                    id="hospital_select"
+                                    formControlName="id_hospital">
+                                <option value="" selected>Elije un hospital</option>
+                                <option *ngFor="let auxHospi of hospitalesOptions; let ind = index" [value]="auxHospi.id">
+                                    ({{ind+1}}) {{auxHospi.nombre}}
+                                </option>
+                            </select>
+                            <small *ngIf="campoInvalido('id_hospital')" class="text-danger">Elije un hospital válido</small>
+    
+                        </div>
+    
+                        <div class="col-12">
+                            <button     type="submit" 
+                                        class="btn btn-success waves-effect waves-light m-r-10"
+                                        >
+                                <i class="fa fa-save mx-1"></i>
+                                Guardar cambios
+                            </button>
+                        </div>
+                    
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-6" *ngIf="hospitalSelected">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Hospital</h4>
-                <h6 class="card-subtitle">{{hospitalSelected.nombre}}</h6>
-                <div class="row">
-                    <div class="col-12 mb-4 text-center">
-                        <img     
-                                [src]="hospitalSelected.imagenHospi" 
-                                alt="" 
-                                srcset=""
-                                class="current-img">
+    
+        <div class="col-md-6" *ngIf="hospitalSelected">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Hospital</h4>
+                    <h6 class="card-subtitle">{{hospitalSelected.nombre}}</h6>
+                    <div class="row">
+                        <div class="col-12 mb-4 text-center">
+                            <img     
+                                    [src]="hospitalSelected.imagenHospi" 
+                                    alt="" 
+                                    srcset=""
+                                    class="current-img">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

@@ -24,10 +24,18 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, 
               private _router: Router, 
               private userService: UsuarioService,
-              private ngZone: NgZone) { }
+              private ngZone: NgZone) { 
+                document.querySelector('html').className = "allHeighWidth";
+                document.body.className = "allHeighWidth";
+              }
 
   ngOnInit(): void { 
     this.renderButton();
+  }
+
+  ngOnDestroy() {
+    document.querySelector('html').className = "";
+    document.body.className = "";
   }
 
   login(){

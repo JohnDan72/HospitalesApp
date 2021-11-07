@@ -1,4 +1,61 @@
-<section id="wrapper" class="login-register login-sidebar"
+<!-- main -->
+<section class="row main">
+    <!-- img section -->
+    <section class="d-none d-md-block col-md-6 col-lg-8" id="login_bg">
+    </section>
+    <!-- form section -->
+    <section class="col-12 col-md-6 col-lg-4">
+        <section class="container mt-3">
+            <form class="row form-horizontal form-material" id="loginform" autocomplete="off" [formGroup]="registerForm"
+                (ngSubmit)="registrarUsuario()">
+                <a href="javascript:void(0)" class="col-12 text-center db"><img
+                        src="../assets/images/hospis-logo-dark.png" alt="Home" width="40" /><br /><img
+                        src="../assets/images/letters-light.png" alt="Home" height="20" /></a>
+                <small class="col-12 text-center">Create your account and enjoy</small>
+                <h4 class="col-12 box-title m-t-40 m-b-0">Register Now</h4>
+                <div class="col-12 form-group m-t-20">
+                    <input class="form-control form-control-sm" type="text" placeholder="Name" formControlName="nombre">
+                    <small class="text-danger" *ngIf="campoNoValido('nombre')">El nombre es obligatorio</small>
+                </div>
+                <div class="col-12 form-group ">
+                    <input class="form-control form-control-sm" type="text" placeholder="Email" formControlName="email">
+                    <small class="text-danger" *ngIf="campoNoValido('email')">Email es requerido y debe ser
+                        válido</small>
+                </div>
+                <div class="col-12 form-group ">
+                    <input class="form-control form-control-sm" type="password" placeholder="Password" formControlName="password">
+                    <small class="text-danger" *ngIf="campoNoValido('password')">Password debe ser de mínimo 6 uy
+                        hasta 25 caracteres</small>
+                </div>
+                <div class="col-12 form-group">
+                    <input class="form-control form-control-sm" type="password" placeholder="Confirm Password"
+                        formControlName="password2">
+                    <small class="text-danger" *ngIf="checarPasswords()">Las contraseñas deben coincidir</small>
+                </div>
+                <div class="col-12 form-group">
+                    <div class="checkbox checkbox-primary p-t-0">
+                        <input id="checkbox-signup" type="checkbox" formControlName="terminos">
+                        <label for="checkbox-signup"> I agree to all <a href="#">Terms</a></label>
+                    </div>
+                    <small class="text-danger" *ngIf="aceptaTerminos()">Debes aceptar los términos y
+                        condiciones</small>
+                </div>
+
+                <div class="col-12 form-group text-center m-t-20">
+                    <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
+                        type="submit">Sign Up</button>
+                </div>
+                <div class="col-12 form-group m-b-0 text-center mb-3">
+                        <p>Already have an account? <a routerLink="/login" routerLinkActive="router-link-active"
+                                class="text-info m-l-5"><b>Sign In</b></a></p>
+                </div>
+            </form>
+        </section>
+    </section>
+</section>
+
+
+<!-- <section id="wrapper" class="login-register login-sidebar"
     style="background-image:url(../../../assets/images/fondoLogin-Register.jpg);">
     <div class="login-box card">
         <div class="card-body">
@@ -63,4 +120,4 @@
             </form>
         </div>
     </div>
-</section>
+</section> -->
